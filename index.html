@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metamorfosis - Materi IPA SD</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2ecc71;
+    --green-dark: #27ae60;
+    --yellow: #f1c40f;
+    --orange: #e67e22;
+    --blue: #3498db;
+    --purple: #9b59b6;
+    --pink: #e91e8c;
+    --bg: #fefdf8;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --light: #f0faf4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 50%, #1abc9c 100%);
+    padding: 40px 20px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50px; left: -50px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -30px;
+    width: 150px; height: 150px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    color: white;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    color: white;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    margin-bottom: 8px;
+  }
+  .header p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .emoji-row {
+    font-size: 2rem;
+    margin-top: 16px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* WAVE */
+  .wave {
+    background: linear-gradient(135deg, #27ae60, #1abc9c);
+    height: 50px;
+    clip-path: ellipse(55% 100% at 50% 0%);
+    margin-top: -2px;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px 16px 60px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.7rem;
+    color: var(--green-dark);
+    margin: 36px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title span.icon {
+    font-size: 1.8rem;
+  }
+
+  /* INFO CARD */
+  .info-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(46,204,113,0.12);
+    border-left: 5px solid var(--green);
+  }
+  .info-card p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  /* JENIS CARDS */
+  .jenis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 540px) { .jenis-grid { grid-template-columns: 1fr; } }
+
+  .jenis-card {
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .jenis-card.sempurna {
+    background: linear-gradient(135deg, #e8f8f0, #d5f5e3);
+    border: 2px solid #82e0aa;
+  }
+  .jenis-card.tidak {
+    background: linear-gradient(135deg, #fef9e7, #fdebd0);
+    border: 2px solid #f8c471;
+  }
+  .jenis-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+  .jenis-card.sempurna h3 { color: #1e8449; }
+  .jenis-card.tidak h3 { color: #b7770d; }
+  .jenis-card p { font-size: 0.95rem; color: #555; line-height: 1.6; }
+  .jenis-card .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .sempurna .badge { background: #27ae60; color: white; }
+  .tidak .badge { background: #e67e22; color: white; }
+
+  /* TAHAPAN */
+  .tahapan-wrapper {
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
+  }
+  .tahapan-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .tahapan-title.kupu { color: #9b59b6; }
+  .tahapan-title.belalang { color: #e67e22; }
+
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .step {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    position: relative;
+  }
+  .step-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .step-label {
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+  .step-desc {
+    font-size: 0.75rem;
+    color: #777;
+    line-height: 1.4;
+  }
+  .arrow {
+    font-size: 1.4rem;
+    margin-top: 22px;
+    color: #aaa;
+    flex: 0;
+  }
+
+  .kupu .step-circle { background: linear-gradient(135deg, #d7bde2, #a569bd); }
+  .kupu .step-label { color: #7d3c98; }
+  .belalang .step-circle { background: linear-gradient(135deg, #fdebd0, #f0b27a); }
+  .belalang .step-label { color: #a04000; }
+
+  /* CONTOH HEWAN */
+  .contoh-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .hewan-card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px 12px;
+    text-align: center;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+    cursor: default;
+  }
+  .hewan-card:hover { transform: translateY(-4px); }
+  .hewan-card .emoji { font-size: 2.5rem; margin-bottom: 8px; }
+  .hewan-card .nama { font-weight: 800; font-size: 0.9rem; }
+  .hewan-card .tipe {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-top: 5px;
+    display: inline-block;
+    font-weight: 700;
+  }
+  .tipe.sempurna { background: #d5f5e3; color: #1e8449; }
+  .tipe.tidak { background: #fdebd0; color: #a04000; }
+
+  /* PERBEDAAN TABLE */
+  .diff-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  .diff-table th {
+    padding: 14px 16px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+  .diff-table th:first-child { background: #ecf0f1; color: #555; }
+  .diff-table th:nth-child(2) { background: #27ae60; color: white; }
+  .diff-table th:nth-child(3) { background: #e67e22; color: white; }
+  .diff-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .diff-table tr:last-child td { border-bottom: none; }
+  .diff-table tr:nth-child(even) td { background: #fafafa; }
+  .diff-table td:first-child { font-weight: 700; color: #555; }
+
+  /* SOAL */
+  .soal-header {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+  }
+  .soal-header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  .soal-header p { opacity: 0.9; font-size: 0.95rem; }
+
+  .soal-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--blue);
+  }
+  .soal-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    background: var(--blue);
+    color: white;
+    border-radius: 50%;
+    font-weight: 900;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  .soal-q {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 14px;
+    color: #2c3e50;
+    line-height: 1.6;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border-radius: 12px;
+    border: 2px solid #e8e8e8;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    background: #fafafa;
+  }
+  .opt:hover { border-color: var(--blue); background: #eaf4fb; }
+  .opt.correct { border-color: #27ae60; background: #d5f5e3; color: #1a5c35; font-weight: 700; }
+  .opt.wrong { border-color: #e74c3c; background: #fdecea; color: #922b21; }
+  .opt.disabled { pointer-events: none; }
+  .opt-letter {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .opt.correct .opt-letter { background: #27ae60; color: white; }
+  .opt.wrong .opt-letter { background: #e74c3c; color: white; }
+
+  .feedback {
+    margin-top: 12px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.benar { background: #d5f5e3; color: #1e8449; }
+  .feedback.salah { background: #fdecea; color: #922b21; }
+
+  /* SKOR */
+  .skor-box {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    color: white;
+    margin-top: 24px;
+    display: none;
+  }
+  .skor-box.show { display: block; }
+  .skor-box .nilai {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    margin: 8px 0;
+  }
+  .skor-box p { font-size: 1rem; opacity: 0.9; }
+  .btn-ulang {
+    margin-top: 16px;
+    background: white;
+    color: #e67e22;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .btn-ulang:hover { transform: scale(1.05); }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .submit-btn:hover { transform: translateY(-2px); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: #aaa;
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">🌿 Materi IPA · Kelas 4–6 SD</div>
+  <h1>Metamorfosis</h1>
+  <p>Perubahan bentuk hewan dari kecil sampai dewasa</p>
+  <div class="emoji-row">🦋 🐛 🥚 🐸 🦗</div>
+</div>
+<div class="wave"></div>
+
+<main>
+
+  <!-- APA ITU METAMORFOSIS -->
+  <div class="section-title"><span class="icon">📖</span> Apa Itu Metamorfosis?</div>
+  <div class="info-card">
+    <p>
+      <strong>Metamorfosis</strong> adalah proses perubahan bentuk pada hewan sejak lahir/menetas hingga menjadi hewan dewasa. 
+      Perubahan ini tidak hanya berubah ukurannya saja, tetapi juga berubah bentuk tubuhnya secara berbeda-beda.
+    </p>
+    <br>
+    <p>
+      Tidak semua hewan mengalami metamorfosis. Metamorfosis terjadi pada serangga, amfibi, dan beberapa hewan lainnya. 
+      Metamorfosis dibagi menjadi <strong>dua jenis</strong>, yaitu <strong>metamorfosis sempurna</strong> dan <strong>metamorfosis tidak sempurna</strong>.
+    </p>
+  </div>
+
+  <!-- JENIS METAMORFOSIS -->
+  <div class="section-title"><span class="icon">🔍</span> Jenis-Jenis Metamorfosis</div>
+  <div class="jenis-grid">
+    <div class="jenis-card sempurna">
+      <span class="badge">Holometabola</span>
+      <h3>🦋 Metamorfosis Sempurna</h3>
+      <p>Hewan mengalami <strong>4 tahap</strong> perubahan bentuk yang sangat berbeda satu sama lain. 
+      Bentuk larva sangat berbeda dari hewan dewasanya.</p>
+    </div>
+    <div class="jenis-card tidak">
+      <span class="badge">Hemimetabola</span>
+      <h3>🦗 Metamorfosis Tidak Sempurna</h3>
+      <p>Hewan mengalami <strong>3 tahap</strong> perubahan. Bentuk nimfa mirip dengan hewan dewasanya, 
+      hanya berbeda ukuran dan belum punya sayap.</p>
+    </div>
+  </div>
+
+  <!-- TAHAPAN -->
+  <div class="section-title"><span class="icon">🔄</span> Tahapan Metamorfosis</div>
+
+  <div class="tahapan-wrapper">
+    <div class="tahapan-title kupu">🦋 Metamorfosis Sempurna — Contoh: Kupu-Kupu</div>
+    <div class="steps kupu">
+      <div class="step">
+        <div class="step-circle">🥚</div>
+        <div class="step-label">1. Telur</div>
+        <div class="step-desc">Induk bertelur di daun tumbuhan</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="step-circle">🐛</div>
+        <div class="step-label">2. Larva</div>
+        <div class="step-desc">Menetas jadi ulat, makan daun</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="step-circle">🫙</div>
+        <div class="step-label">3. Pupa</div>
+        <div class="step-desc">Membentuk kepompong/kokon</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="step-circle">🦋</div>
+        <div class="step-label">4. Dewasa</div>
+        <div class="step-desc">Kupu-kupu keluar dari kepompong</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tahapan-wrapper">
+    <div class="tahapan-title belalang">🦗 Metamorfosis Tidak Sempurna — Contoh: Belalang</div>
+    <div class="steps belalang">
+      <div class="step">
+        <div class="step-circle">🥚</div>
+        <div class="step-label">1. Telur</div>
+        <div class="step-desc">Induk bertelur di dalam tanah</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="step-circle">🦗</div>
+        <div class="step-label">2. Nimfa</div>
+        <div class="step-desc">Mirip belalang kecil, belum bersayap</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="step-circle">🦗</div>
+        <div class="step-label">3. Dewasa</div>
+        <div class="step-desc">Belalang dewasa, sudah bersayap</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTOH HEWAN -->
+  <div class="section-title"><span class="icon">🐾</span> Contoh Hewan</div>
+  <div class="contoh-grid">
+    <div class="hewan-card">
+      <div class="emoji">🦋</div>
+      <div class="nama">Kupu-Kupu</div>
+      <span class="tipe sempurna">Sempurna</span>
+    </div>
+    <div class="hewan-card">
+      <div class="emoji">🐝</div>
+      <div class="nama">Lebah</div>
+      <span class="tipe sempurna">Sempurna</span>
+    </div>
+    <div class="hewan-card">
+      <div class="emoji">🪲</div>
+      <div class="nama">Kumbang</div>
+      <span class="tipe sempurna">Sempurna</span>
+    </div>
+    <div class="hewan-card">
+      <div class="emoji">🦟</div>
+      <div class="nama">Nyamuk</div>
+      <span class="tipe sempurna">Sempurna</span>
+    </div>
+    <div class="hewan-card">
+      <div class="emoji">🐸</div>
+      <div class="nama">Katak</div>
+      <span class="tipe sempurna">Sempurna</span>
+    </div>
+    <div class="hewan-card">
+      <div class="emoji">🦗</div>
+      <div class="nama">Belalang</div>
+      <span class="tipe tidak">Tdk Sempurna</span>
+    </div>
+    <div class="hewan-card">
+      <div class="emoji">🪳</div>
+      <div class="nama">Kecoa</div>
+      <span class="tipe tidak">Tdk Sempurna</span>
+    </div>
+    <div class="hewan-card">
+      <div class="emoji">🦂</div>
+      <div class="nama">Jangkrik</div>
+      <span class="tipe tidak">Tdk Sempurna</span>
+    </div>
+  </div>
+
+  <!-- PERBEDAAN -->
+  <div class="section-title"><span class="icon">📊</span> Perbedaan Dua Jenis Metamorfosis</div>
+  <table class="diff-table">
+    <thead>
+      <tr>
+        <th>Aspek</th>
+        <th>🦋 Sempurna</th>
+        <th>🦗 Tidak Sempurna</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Jumlah Tahap</td>
+        <td>4 tahap</td>
+        <td>3 tahap</td>
+      </tr>
+      <tr>
+        <td>Tahapan</td>
+        <td>Telur → Larva → Pupa → Dewasa</td>
+        <td>Telur → Nimfa → Dewasa</td>
+      </tr>
+      <tr>
+        <td>Bentuk Muda</td>
+        <td>Berbeda jauh dari dewasa</td>
+        <td>Mirip dengan dewasa</td>
+      </tr>
+      <tr>
+        <td>Fase Pupa</td>
+        <td>Ada (kepompong)</td>
+        <td>Tidak ada</td>
+      </tr>
+      <tr>
+        <td>Contoh Hewan</td>
+        <td>Kupu-kupu, lebah, nyamuk, katak</td>
+        <td>Belalang, kecoa, jangkrik</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SOAL LATIHAN -->
+  <div class="soal-header">
+    <h2>📝 Soal Latihan</h2>
+    <p>10 soal pilihan ganda · Klik jawaban yang kamu pilih!</p>
+  </div>
+
+  <div id="soal-container"></div>
+  <button class="submit-btn" id="submitBtn" onclick="hitungSkor()" disabled>Lihat Nilai Saya 🎯</button>
+  <div class="skor-box" id="skorBox">
+    <div>🏆 Nilai Kamu</div>
+    <div class="nilai" id="nilaiAngka"></div>
+    <p id="pesanSkor"></p>
+    <button class="btn-ulang" onclick="ulangSoal()">🔄 Coba Lagi</button>
+  </div>
+
+</main>
+
+<footer>Materi IPA SD · Perubahan Metamorfosis 🦋</footer>
+
+<script>
+const soalData = [
+  {
+    q: "Apa yang dimaksud dengan metamorfosis?",
+    opts: ["Pertumbuhan ukuran tubuh hewan saja", "Perubahan bentuk hewan dari lahir hingga dewasa", "Perubahan warna kulit hewan", "Perpindahan tempat tinggal hewan"],
+    ans: 1
+  },
+  {
+    q: "Berapa tahap yang dilalui hewan yang mengalami metamorfosis sempurna?",
+    opts: ["2 tahap", "3 tahap", "4 tahap", "5 tahap"],
+    ans: 2
+  },
+  {
+    q: "Urutan tahapan metamorfosis sempurna yang benar adalah...",
+    opts: ["Telur → Pupa → Larva → Dewasa", "Telur → Larva → Pupa → Dewasa", "Larva → Telur → Pupa → Dewasa", "Telur → Nimfa → Dewasa"],
+    ans: 1
+  },
+  {
+    q: "Tahap 'pupa' pada kupu-kupu disebut juga...",
+    opts: ["Ulat", "Nimfa", "Kepompong / Kokon", "Larva"],
+    ans: 2
+  },
+  {
+    q: "Hewan manakah yang mengalami metamorfosis TIDAK SEMPURNA?",
+    opts: ["Kupu-kupu", "Lebah", "Belalang", "Nyamuk"],
+    ans: 2
+  },
+  {
+    q: "Pada metamorfosis tidak sempurna, bentuk muda hewan disebut...",
+    opts: ["Larva", "Pupa", "Nimfa", "Kumbang"],
+    ans: 2
+  },
+  {
+    q: "Katak mengalami jenis metamorfosis...",
+    opts: ["Tidak sempurna karena 3 tahap", "Sempurna karena melewati 4 tahap berbeda", "Tidak mengalami metamorfosis", "Sempurna karena mirip induknya"],
+    ans: 1
+  },
+  {
+    q: "Perbedaan utama metamorfosis sempurna dan tidak sempurna adalah...",
+    opts: ["Sempurna berlangsung lebih cepat", "Tidak sempurna memiliki fase kepompong", "Sempurna memiliki fase pupa, tidak sempurna tidak ada", "Tidak sempurna hanya terjadi di air"],
+    ans: 2
+  },
+  {
+    q: "Pada metamorfosis sempurna, bentuk larva kupu-kupu adalah...",
+    opts: ["Kepompong", "Ulat", "Telur", "Nimfa"],
+    ans: 1
+  },
+  {
+    q: "Hewan berikut yang TIDAK mengalami metamorfosis adalah...",
+    opts: ["Nyamuk", "Katak", "Ayam", "Kumbang"],
+    ans: 2
+  }
+];
+
+let jawaban = new Array(soalData.length).fill(null);
+let selesai = false;
+
+function renderSoal() {
+  const container = document.getElementById('soal-container');
+  container.innerHTML = '';
+  soalData.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'soal-card';
+    const letters = ['A','B','C','D'];
+    card.innerHTML = `
+      <div class="soal-num">${i+1}</div>
+      <div class="soal-q">${s.q}</div>
+      <div class="options" id="opts-${i}">
+        ${s.opts.map((o, j) => `
+          <div class="opt" onclick="pilihJawaban(${i}, ${j})" id="opt-${i}-${j}">
+            <span class="opt-letter">${letters[j]}</span>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="feedback" id="fb-${i}"></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIdx, optIdx) {
+  if (selesai) return;
+  jawaban[soalIdx] = optIdx;
+
+  // Highlight selected
+  for (let j = 0; j < 4; j++) {
+    const el = document.getElementById(`opt-${soalIdx}-${j}`);
+    if (el) {
+      el.classList.remove('correct','wrong');
+      el.style.borderColor = j === optIdx ? '#3498db' : '';
+      el.style.background = j === optIdx ? '#eaf4fb' : '';
+    }
+  }
+
+  // Check if all answered
+  if (jawaban.every(j => j !== null)) {
+    document.getElementById('submitBtn').disabled = false;
+  }
+}
+
+function hitungSkor() {
+  selesai = true;
+  document.getElementById('submitBtn').disabled = true;
+  let benar = 0;
+  soalData.forEach((s, i) => {
+    const pil = jawaban[i];
+    const fb = document.getElementById(`fb-${i}`);
+    for (let j = 0; j < 4; j++) {
+      const el = document.getElementById(`opt-${i}-${j}`);
+      if (!el) continue;
+      el.classList.add('disabled');
+      el.style.borderColor = '';
+      el.style.background = '';
+      if (j === s.ans) el.classList.add('correct');
+      else if (j === pil && j !== s.ans) el.classList.add('wrong');
+    }
+    if (pil === s.ans) {
+      benar++;
+      fb.textContent = '✅ Benar!';
+      fb.className = 'feedback show benar';
+    } else {
+      const letters = ['A','B','C','D'];
+      fb.textContent = `❌ Salah. Jawaban yang benar: ${letters[s.ans]}`;
+      fb.className = 'feedback show salah';
+    }
+  });
+
+  const nilai = Math.round((benar / soalData.length) * 100);
+  const box = document.getElementById('skorBox');
+  document.getElementById('nilaiAngka').textContent = nilai;
+  let pesan = '';
+  if (nilai === 100) pesan = '🌟 Sempurna! Kamu sangat hebat!';
+  else if (nilai >= 80) pesan = '👏 Bagus sekali! Terus belajar ya!';
+  else if (nilai >= 60) pesan = '😊 Lumayan! Pelajari lagi yuk!';
+  else pesan = '💪 Semangat! Coba lagi bisa lebih baik!';
+  document.getElementById('pesanSkor').textContent = `${benar} dari ${soalData.length} soal benar · ${pesan}`;
+  box.classList.add('show');
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function ulangSoal() {
+  jawaban = new Array(soalData.length).fill(null);
+  selesai = false;
+  document.getElementById('skorBox').classList.remove('show');
+  document.getElementById('submitBtn').disabled = true;
+  renderSoal();
+  window.scrollTo({ top: document.getElementById('soal-container').offsetTop - 20, behavior: 'smooth' });
+}
+
+renderSoal();
+</script>
+</body>
+</html>
